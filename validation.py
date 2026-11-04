@@ -54,7 +54,11 @@ def validate_matches_num(matches,home_team_id,out_team_id):
         home_team,away_team = match.get("home team id"),match.get("away team id")
         if home_team == home_team_id and away_team == out_team_id:
             raise ValueError("two groups cannot have multiple games!")
-            
+
+def validate_choice_rate_table(choice):
+    if not(isinstance(choice) is int and 5>choice>0):
+        raise ValueError("choice must be an integer between 1 to 4!")
+
     
         
         
