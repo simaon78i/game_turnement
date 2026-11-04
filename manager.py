@@ -1,58 +1,14 @@
 import logging
 import validation as validate
 from exceptions import AddTeamError,AddMatchError,InputError
+# from mock_data import teams,matches
 
 logging.basicConfig(level=logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s")
 
-# teams = []
-# matches = []
+teams = []
+matches = []
 
-teams = [
-    {"id": 1, "name": "Maccabi", "played": 4,
-     "wins": 2, "draws": 1, "losses": 1,
-     "goals_for": 6, "goals_against": 4, "points": 7},
-    {"id": 2, "name": "Hapoel", "played": 4,
-     "wins": 0, "draws": 0, "losses": 4,
-     "goals_for": 2, "goals_against": 8, "points": 0},
-    {"id": 3, "name": "Beitar", "played": 6,
-     "wins": 3, "draws": 1, "losses": 2,
-     "goals_for": 11, "goals_against": 8, "points": 10},
-    {"id": 4, "name": "Ironi", "played": 5,
-     "wins": 3, "draws": 1, "losses": 1,
-     "goals_for": 11, "goals_against": 8, "points": 10},
-    {"id": 5, "name": "Bnei Yehuda", "played": 6,
-     "wins": 2, "draws": 1, "losses": 3,
-     "goals_for": 5, "goals_against": 7, "points": 7},
-    {"id": 6, "name": "Hakoah", "played": 4,
-     "wins": 3, "draws": 1, "losses": 0,
-     "goals_for": 8, "goals_against": 5, "points": 10},
-    {"id": 7, "name": "Shimshon", "played": 3,
-     "wins": 0, "draws": 1, "losses": 2,
-     "goals_for": 4, "goals_against": 7, "points": 1},
-    {"id": 8, "name": "Sektzia", "played": 0,
-     "wins": 0, "draws": 0, "losses": 0,
-     "goals_for": 0, "goals_against": 0, "points": 0},
-]
-
-matches = [
-    {"home_team_id": 1, "away_team_id": 2, "home_goals": 3, "away_goals": 1},
-    {"home_team_id": 6, "away_team_id": 5, "home_goals": 2, "away_goals": 1},
-    {"home_team_id": 3, "away_team_id": 4, "home_goals": 1, "away_goals": 2},
-    {"home_team_id": 3, "away_team_id": 5, "home_goals": 3, "away_goals": 1},
-    {"home_team_id": 2, "away_team_id": 5, "home_goals": 0, "away_goals": 1},
-    {"home_team_id": 4, "away_team_id": 5, "home_goals": 1, "away_goals": 0},
-    {"home_team_id": 4, "away_team_id": 7, "home_goals": 2, "away_goals": 2},
-    {"home_team_id": 4, "away_team_id": 6, "home_goals": 3, "away_goals": 4},
-    {"home_team_id": 3, "away_team_id": 6, "home_goals": 1, "away_goals": 1},
-    {"home_team_id": 1, "away_team_id": 5, "home_goals": 0, "away_goals": 0},
-    {"home_team_id": 3, "away_team_id": 1, "home_goals": 0, "away_goals": 2},
-    {"home_team_id": 5, "away_team_id": 7, "home_goals": 2, "away_goals": 1},
-    {"home_team_id": 2, "away_team_id": 3, "home_goals": 1, "away_goals": 3},
-    {"home_team_id": 1, "away_team_id": 4, "home_goals": 1, "away_goals": 3},
-    {"home_team_id": 2, "away_team_id": 6, "home_goals": 0, "away_goals": 1},
-    {"home_team_id": 7, "away_team_id": 3, "home_goals": 1, "away_goals": 3},
-]
 
 def add_team(user_input):
     user_id=""
@@ -139,7 +95,6 @@ def managing_teams_goals_stats(home_team_id,out_team_id,ht_goals,ot_goals):
         else:
             wt_goals = ot_goals
             lt_goals = ht_goals
-        print("to update",wt_goals,lt_goals,type(wt_goals),type(lt_goals))
         update_teams(teams,wt_goals,lt_goals,losing_team,wining_team)
         logging.info("the results was added successfully :)")
 
@@ -165,10 +120,9 @@ def update_teams(teams,wt_goals,lt_goals,losing_team,wining_team,draw=0):
         if draw==0:
             team["points"]+=3
         
-        
+
 def check_results(home_team_id,out_team_id,ht_goals,ot_goals):
     if ht_goals>ot_goals:
-        print("win")
         return home_team_id,out_team_id
     elif ht_goals==ot_goals:
         return "draw",1
@@ -179,6 +133,8 @@ def managing_rating_table_display(leading_team = None):
     note: im using sorting from the list significant order,
     i took this theory from the Radix Sort algorithm idea.
     """
+    if not teams:
+        return
     list_to_display = sorted(teams,key=lambda t:t["name"])
     list_to_display = sorted(list_to_display,key=lambda t:t["goals_for"],reverse=True)
     list_to_display = sort_by_difference(list_to_display)

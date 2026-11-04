@@ -1,10 +1,16 @@
 import manager
 import logging
+# from mock_data import teams,matches
 
 
 def find_leading_team():
     logging.debug("leading team")
-    return manager.managing_rating_table_display(1)[0]
+    list_to_display = manager.managing_rating_table_display(1)
+    if not list_to_display:
+        logging.info("empty teams list in find leading team")
+        print("list is empty :(")
+        return
+    return list_to_display[0]
 
 def find_best_attack():
     logging.debug("best attack")
@@ -58,7 +64,10 @@ def check_championship_potential():
         number_of_goals = team["goals_for"]
         team_potential =number_of_goals + \
             (len(manager.teams)-1-number_of_matches)*3
-        if find_leading_team()["goals_for"]<team_potential:
+        leading_team = find_leading_team()
+        if not find_leading_team():
+            return
+        if leading_team["goals_for"]<team_potential:
             print(f"this team has the potential to win\
                  the tournament!!! {team}")
         

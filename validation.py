@@ -21,7 +21,7 @@ def validate_id(team_id):
         int_team_id = int(team_id)
     except ValueError:
         raise_flag = True
-    if not int_team_id>0:
+    if (not raise_flag) and not int_team_id>0:
         raise_flag = True
     if raise_flag:
           raise ValueError("team id should be an \
@@ -56,12 +56,11 @@ def validate_goals(ht_goals,ot_goals):
     int_ot = None
     raise_flag = False
     try:
-        print(ht_goals,ot_goals)
         int_ht = int(ht_goals)
         int_ot = int(ot_goals)
     except ValueError:
         raise_flag = True
-    if int_ht<0 and int_ot <0:
+    if (not raise_flag) and int_ht<0 and int_ot <0:
         raise_flag = True
     if raise_flag:
         raise ValueError("teams goals must be an integer greater then zero!")
@@ -94,7 +93,7 @@ def validate_choice_rate_table(choice):
         int_choice = int(choice)
     except ValueError:
         raise_flag = True
-    if 5>int_choice>0:
+    if (not raise_flag) and 5>int_choice>0:
         raise_flag = True
     if raise_flag:
         raise ValueError("choice must be an integer between 1 to 4!")
@@ -107,7 +106,7 @@ def validate_menu_handling(menu_choice):
         int_choice = int(menu_choice)
     except ValueError:
         raise_flag = True
-    if  int_choice>9 or int_choice<0:
+    if (not raise_flag) and (int_choice>10 or int_choice<0):
         raise_flag = True
     if raise_flag:
         raise ValueError("wrong input please choose an integer from 0 to 10!")

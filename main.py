@@ -60,7 +60,7 @@ def receive_team():
     loop_flag = False
     user_input = 1
     while not loop_flag and user_input!="0":
-        user_input = input("please enter team id,team name only separated by , without spaces: ")
+        user_input = input("please enter team id,team name only separated by , without spaces: 0 back to menu ")
         try:
             manager.add_team(user_input)
             loop_flag=True
@@ -72,7 +72,7 @@ def receive_match():
     loop_flag =False
     user_input = 1
     while not loop_flag and user_input!="0":
-        user_input = input("please insert the match details: home team,away_team,home goals,away goals: ")
+        user_input = input("please insert the match details: home team,away_team,home goals,away goals: 0 back to menu ")
         try:
             manager.add_match(user_input)
             loop_flag = True
