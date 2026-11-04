@@ -149,9 +149,3 @@ def menu_handling(menu_choice):
     except ValueError as e:
         logging.error("wrong user input in menu")
         raise InputError(e)
-
-    
-
-
-    
-    

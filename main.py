@@ -36,15 +36,17 @@ def menu_handling(menu_choice):
         elif int_menu_choice==4:
             manager.managing_rating_table_display()
         elif int_menu_choice==5:
-            ...
+            logic.find_leading_team()
         elif int_menu_choice==6:
-            ...
+            logic.find_best_attack()
         elif int_menu_choice==7:
-            ...
+            logic.calc_success_rate()
         elif int_menu_choice==8:
-            ...
+            logic.find_no_wins_teams()
         elif int_menu_choice==9:
-            ...
+            logic.tournament_summary()
+        elif int_menu_choice ==10:
+            logic.check_championship_potential()
         menu_choice = input(MENU_MESSAGE)
         try:
             manager.menu_handling(menu_choice)

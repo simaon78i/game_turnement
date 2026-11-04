@@ -99,11 +99,3 @@ def validating_match_input(user_input):
         return home_team,out_team,ht_goals,ot_goals
     except TypeError as e:
         raise ValueError("teams id and goals are in wrong format!!")
-    
-        
-        
-
-    
-
-
-        
