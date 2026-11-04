@@ -36,7 +36,7 @@ def menu_handling(menu_choice):
         elif int_menu_choice==4:
             manager.managing_rating_table_display()
         elif int_menu_choice==5:
-            logic.find_leading_team()
+            print(logic.find_leading_team())
         elif int_menu_choice==6:
             logic.find_best_attack()
         elif int_menu_choice==7:
@@ -52,12 +52,8 @@ def menu_handling(menu_choice):
             manager.menu_handling(menu_choice)
         except InputError as e:
             print(e)
-        continue
+            continue
         int_menu_choice = int(menu_choice)
-
-
-
-
 
 
 def receive_team():
@@ -71,6 +67,7 @@ def receive_team():
         except AddTeamError as e:
             print(e)
 
+
 def receive_match():
     loop_flag =False
     user_input = 1
@@ -81,13 +78,8 @@ def receive_match():
             loop_flag = True
         except AddMatchError as e:
             print(e)
-    
-
-
-
 
 def main():
-    
     menu_choice = input(MENU_MESSAGE)
     menu_handling(menu_choice)
 

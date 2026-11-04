@@ -1,8 +1,13 @@
 import manager
+import logging
+
+
 def find_leading_team():
-    return manager.managing_rating_table_display()[0]
+    logging.debug("leading team")
+    return manager.managing_rating_table_display(1)[0]
 
 def find_best_attack():
+    logging.debug("best attack")
     if not manager.matches:
         logging.info("empty matches table")
         print("no games yet :(")
@@ -16,6 +21,7 @@ def find_best_attack():
             print(team)
 
 def calc_success_rate():
+    logging.debug("calculate success rate")
     for team in manager.teams:
         if team["played"] == 0:
             print("No Games")
@@ -24,11 +30,13 @@ def calc_success_rate():
                  {(100*3*team["points"])/team["played"]}")
 
 def find_no_wins_teams():
+    logging.debug("no wining teams ")
     for team in manager.teams:
         if team["played"] > 0 and team["wins"] == 0:
             print(f"team with no wins {team}")
 
 def tournament_summary():
+    logging.debug("tournament summary")
     print(f"===tournament summary===")
     print(f"the number of teams: {len(manager.teams)}")
     print(f"the number of games: {len(manager.matches)}")
@@ -42,7 +50,7 @@ def tournament_summary():
         if len(manager.matches)>0 else 0}")
     #draws needs to be divide by 2 since it counted both ways
     print(f"the number of draws is: {number_of_draws/2}")
-    print(f"the leading team is: {find_leading_team}")
+    print(f"the leading team is: {find_leading_team()}")
 
 def check_championship_potential():
     for team in manager.teams:
