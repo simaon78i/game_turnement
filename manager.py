@@ -38,6 +38,7 @@ def show_teams(choice = 0):
         if not choice:
                display+=f""" team id:{team.get("id")}\n"""
         display+=f"""team name:{team.get("name")}\n
+        
         ===stats===
 
         played: {team.get("played")}\n

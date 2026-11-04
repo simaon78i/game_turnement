@@ -89,9 +89,9 @@ def validate_menu_handling(menu_choice):
     try:
         int_choice = int(menu_choice)
     except ValueError:
-        raise ValueError("wrong input please choose an integer from 0 to 9!")
+        raise ValueError("wrong input please choose an integer from 0 to 10!")
     if  int_choice>9 or int_choice<0:
-        raise ValueError("wrong input please choose an integer from 0 to 9!")
+        raise ValueError("wrong input please choose an integer from 0 to 10!")
 
 def validating_match_input(user_input):
     try:

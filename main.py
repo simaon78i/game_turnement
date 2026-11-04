@@ -25,7 +25,7 @@ def menu_handling(menu_choice):
         manager.menu_handling(menu_choice)
     except InputError as e:
         print(e)
-    int_menu_choice = int(menu_choice)
+    int_menu_choice =11 if not menu_choice.isdigit() else int(menu_choice)
     while int_menu_choice !=0:
         if int_menu_choice==1:
             receive_team()
@@ -52,6 +52,7 @@ def menu_handling(menu_choice):
             manager.menu_handling(menu_choice)
         except InputError as e:
             print(e)
+        continue
         int_menu_choice = int(menu_choice)
 
 
