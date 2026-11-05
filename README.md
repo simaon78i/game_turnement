@@ -1,4 +1,4 @@
-## this is a tournament system build in python
+# this is a tournament system build in python
 
 ## i used predicate(default parameters) in functions
 ## arguments in order to separate between different cases 
