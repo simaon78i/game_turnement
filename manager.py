@@ -3,11 +3,59 @@ import validation as validate
 from exceptions import AddTeamError,AddMatchError,InputError
 # from mock_data import teams,matches
 
+#CONSTANTS
+INITIAL_DEFAULT_VAL=0
+
 logging.basicConfig(level=logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s")
 
-teams = []
-matches = []
+# teams = []
+# matches = []
+teams = [
+    {"id": 1, "name": "Maccabi", "played": 4,
+     "wins": 2, "draws": 1, "losses": 1,
+     "goals_for": 6, "goals_against": 4, "points": 7},
+    {"id": 2, "name": "Hapoel", "played": 4,
+     "wins": 0, "draws": 0, "losses": 4,
+     "goals_for": 2, "goals_against": 8, "points": 0},
+    {"id": 3, "name": "Beitar", "played": 6,
+     "wins": 3, "draws": 1, "losses": 2,
+     "goals_for": 11, "goals_against": 8, "points": 10},
+    {"id": 4, "name": "Ironi", "played": 5,
+     "wins": 3, "draws": 1, "losses": 1,
+     "goals_for": 11, "goals_against": 8, "points": 10},
+    {"id": 5, "name": "Bnei Yehuda", "played": 6,
+     "wins": 2, "draws": 1, "losses": 3,
+     "goals_for": 5, "goals_against": 7, "points": 7},
+    {"id": 6, "name": "Hakoah", "played": 4,
+     "wins": 3, "draws": 1, "losses": 0,
+     "goals_for": 8, "goals_against": 5, "points": 10},
+    {"id": 7, "name": "Shimshon", "played": 3,
+     "wins": 0, "draws": 1, "losses": 2,
+     "goals_for": 4, "goals_against": 7, "points": 1},
+    {"id": 8, "name": "Sektzia", "played": 0,
+     "wins": 0, "draws": 0, "losses": 0,
+     "goals_for": 0, "goals_against": 0, "points": 0},
+]
+
+matches = [
+    {"home_team_id": 1, "away_team_id": 2, "home_goals": 3, "away_goals": 1},
+    {"home_team_id": 6, "away_team_id": 5, "home_goals": 2, "away_goals": 1},
+    {"home_team_id": 3, "away_team_id": 4, "home_goals": 1, "away_goals": 2},
+    {"home_team_id": 3, "away_team_id": 5, "home_goals": 3, "away_goals": 1},
+    {"home_team_id": 2, "away_team_id": 5, "home_goals": 0, "away_goals": 1},
+    {"home_team_id": 4, "away_team_id": 5, "home_goals": 1, "away_goals": 0},
+    {"home_team_id": 4, "away_team_id": 7, "home_goals": 2, "away_goals": 2},
+    {"home_team_id": 4, "away_team_id": 6, "home_goals": 3, "away_goals": 4},
+    {"home_team_id": 3, "away_team_id": 6, "home_goals": 1, "away_goals": 1},
+    {"home_team_id": 1, "away_team_id": 5, "home_goals": 0, "away_goals": 0},
+    {"home_team_id": 3, "away_team_id": 1, "home_goals": 0, "away_goals": 2},
+    {"home_team_id": 5, "away_team_id": 7, "home_goals": 2, "away_goals": 1},
+    {"home_team_id": 2, "away_team_id": 3, "home_goals": 1, "away_goals": 3},
+    {"home_team_id": 1, "away_team_id": 4, "home_goals": 1, "away_goals": 3},
+    {"home_team_id": 2, "away_team_id": 6, "home_goals": 0, "away_goals": 1},
+    {"home_team_id": 7, "away_team_id": 3, "home_goals": 1, "away_goals": 3},
+]
 
 
 def add_team(user_input):
@@ -22,11 +70,12 @@ def add_team(user_input):
         logging.warning(f"error: team wasn't added {e}")
         raise AddTeamError(e)
     new_team = {"id": team_id, "name": team_name, 
-        "played": 0,"wins": 0, "draws": 0, 
-        "losses": 0,"goals_for": 0, 
-        "goals_against": 0, "points": 0}
+        "played": INITIAL_DEFAULT_VAL,"wins": INITIAL_DEFAULT_VAL, "draws": INITIAL_DEFAULT_VAL, 
+        "losses": INITIAL_DEFAULT_VAL,"goals_for": INITIAL_DEFAULT_VAL, 
+        "goals_against": INITIAL_DEFAULT_VAL, "points": INITIAL_DEFAULT_VAL}
     teams.append(new_team)
     logging.info("new team was added successfully :)")
+
 
 def show_teams(choice = 0,list_to_display=None):
     if not teams:
@@ -40,7 +89,8 @@ def show_teams(choice = 0,list_to_display=None):
         teams_cp = list_to_display
     for team in teams_cp:
         display+= f"""team number:{counter}\n"""
-        #for mission 5, we ordered not to show id in this case
+        #choice is a default predicate for mission 5, we ordered not to 
+        # show id in this case
         if not choice:
                display+=f""" team id:{team.get("id")}\n"""
         display+=f"""team name:{team.get("name")}\n
@@ -58,10 +108,10 @@ def show_teams(choice = 0,list_to_display=None):
     print(display)
 
 def add_match(user_input):
-    home_team_id=0
-    out_team_id=0
-    ht_goals=0
-    ot_goals=0
+    home_team_id=INITIAL_DEFAULT_VAL
+    out_team_id=INITIAL_DEFAULT_VAL
+    ht_goals=INITIAL_DEFAULT_VAL
+    ot_goals=INITIAL_DEFAULT_VAL
     try:
         logging.info("adding a match")
         home_team_id,out_team_id,ht_goals,ot_goals=validate.validating_match_input(user_input)
@@ -87,8 +137,8 @@ def managing_teams_goals_stats(home_team_id,out_team_id,ht_goals,ot_goals):
     if wining_team =="draw":
         update_teams(teams,ht_goals,ot_goals,home_team_id,out_team_id,1)
     else:
-        wt_goals =0
-        lt_goals =0
+        wt_goals =INITIAL_DEFAULT_VAL
+        lt_goals =INITIAL_DEFAULT_VAL
         if wining_team ==home_team_id:
             wt_goals = ht_goals
             lt_goals = ot_goals
@@ -140,6 +190,7 @@ def managing_rating_table_display(leading_team = None):
     list_to_display = sort_by_difference(list_to_display)
     list_to_display = sorted(list_to_display,key=lambda t:t["points"],reverse=True)
     #default value in order not to print when using the leading_team function
+    logging.info("list sorted by reversing the priorities demanded")
     if not leading_team:
         show_teams(1,list_to_display)
     return list_to_display

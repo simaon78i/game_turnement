@@ -1,6 +1,5 @@
 import manager
 import logging
-# from mock_data import teams,matches
 
 
 def find_leading_team():
@@ -10,7 +9,8 @@ def find_leading_team():
         logging.info("empty teams list in find leading team")
         print("list is empty :(")
         return
-    return list_to_display[0]
+    print("the leading team is :")
+    return manager.show_teams(0,[list_to_display[0]])
 
 def find_best_attack():
     logging.debug("best attack")
@@ -22,24 +22,24 @@ def find_best_attack():
     for team in manager.teams:
         if team.get("goals_for")>max_num:
             max_num = team.get("goals_for")
+    print("teams with best attacks: ")
     for team in manager.teams:
         if team.get("goals_for")==max_num:
-            print(team)
+            manager.show_teams(0,[team])
 
 def calc_success_rate():
     logging.debug("calculate success rate")
     for team in manager.teams:
         if team["played"] == 0:
-            print("No Games")
+            print(f"No Games for team {team["name"]}")
         else:
-            print(f"the success rate for team {team["name"]} is:\
-                 {(100*3*team["points"])/team["played"]}")
+            print(f"the success rate for team {team["name"]} is: {(100*3*team["points"])/team["played"]}")
 
 def find_no_wins_teams():
     logging.debug("no wining teams ")
     for team in manager.teams:
         if team["played"] > 0 and team["wins"] == 0:
-            print(f"team with no wins {team}")
+            print(f"team with no wins {manager.show_teams(0,[team])}")
 
 def tournament_summary():
     logging.debug("tournament summary")
@@ -56,7 +56,7 @@ def tournament_summary():
         if len(manager.matches)>0 else 0}")
     #draws needs to be divide by 2 since it counted both ways
     print(f"the number of draws is: {number_of_draws/2}")
-    print(f"the leading team is: {find_leading_team()}")
+    print(f"the leading team is: \n {find_leading_team()}")
 
 def check_championship_potential():
     for team in manager.teams:
@@ -68,8 +68,8 @@ def check_championship_potential():
         if not find_leading_team():
             return
         if leading_team["goals_for"]<team_potential:
-            print(f"this team has the potential to win\
-                 the tournament!!! {team}")
+            print(f"this team has the potential to win the tournament!!! \n{
+                manager.show_teams(0,[team])}")
         
 
 

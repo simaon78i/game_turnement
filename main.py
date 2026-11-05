@@ -36,7 +36,7 @@ def menu_handling(menu_choice):
         elif int_menu_choice==4:
             manager.managing_rating_table_display()
         elif int_menu_choice==5:
-            print(logic.find_leading_team())
+            logic.find_leading_team()
         elif int_menu_choice==6:
             logic.find_best_attack()
         elif int_menu_choice==7:

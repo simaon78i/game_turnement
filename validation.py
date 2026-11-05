@@ -1,3 +1,8 @@
+#CONSTANTS
+
+MENU_MAX_CHOICE = 10
+MENU_MIN_CHOICE = 0
+
 """adding a team validation"""
 
 def validate_team_user_input(user_input):
@@ -85,20 +90,6 @@ def validate_matches_num(matches,home_team_id,out_team_id):
             home_team ==out_team_id  and away_team == home_team_id:
             raise ValueError("two groups cannot have multiple games!")
 
-
-def validate_choice_rate_table(choice):
-    int_choice = None
-    raise_flag = False
-    try:
-        int_choice = int(choice)
-    except ValueError:
-        raise_flag = True
-    if (not raise_flag) and 5>int_choice>0:
-        raise_flag = True
-    if raise_flag:
-        raise ValueError("choice must be an integer between 1 to 4!")
-
-
 def validate_menu_handling(menu_choice):
     int_choice = None
     raise_flag = False
@@ -106,7 +97,7 @@ def validate_menu_handling(menu_choice):
         int_choice = int(menu_choice)
     except ValueError:
         raise_flag = True
-    if (not raise_flag) and (int_choice>10 or int_choice<0):
+    if (not raise_flag) and (int_choice>MENU_MAX_CHOICE or int_choice<MENU_MIN_CHOICE):
         raise_flag = True
     if raise_flag:
         raise ValueError("wrong input please choose an integer from 0 to 10!")
